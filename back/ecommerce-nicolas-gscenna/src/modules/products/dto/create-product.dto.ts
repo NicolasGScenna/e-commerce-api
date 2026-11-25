@@ -19,21 +19,25 @@ export class CreateProductDto{
     @IsNumber()
     @ApiProperty({
         description:'Es el precio del producto, puede tener solo 2 cifras decimales',
-        example:'749.99',
+        example:749.99,
+        type: Number,
+        minimum: 0,
   })
     price:number;
 
     @IsNumber()
     @ApiProperty({
         description:'Es el stock del producto, debe ser un numero entero',
-        example:'10',
+        example:10,
+        type: Number,
+        minimum: 0,
   })
     stock: number;
 
     @IsString()
     @ApiProperty({
         description:'Es la ruta a la imagen del producto',
-        example:'http://iphone17air/example.jpg',
+        example:'https://example.com/images/iphone-17-air.webp',
   })
     imgUrl:string;
 }

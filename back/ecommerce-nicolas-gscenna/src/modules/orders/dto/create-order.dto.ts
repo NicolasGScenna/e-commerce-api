@@ -7,7 +7,7 @@ export class OrderProductDto {
     @IsNotEmpty()
     @ApiProperty({
         description: 'Es el id de un producto',
-        example: 'id : UN_UUID_DE_UN_PRODUCTO'
+        example: '550e8400-e29b-41d4-a716-446655440001'
     })
     id: string;
 }
@@ -17,7 +17,7 @@ export class CreateOrderDto {
     @IsNotEmpty()
     @ApiProperty({
         description:"Es el id de el usuario que va a generar la orden de compra",
-        example:`"userId: "UN_UUID_DE_UN_USER"`
+        example: '550e8400-e29b-41d4-a716-446655440000'
     })
     userId: string;
 
@@ -27,17 +27,10 @@ export class CreateOrderDto {
     @Type(() => OrderProductDto)
     @ApiProperty({
         description:'Es un array de los IDS de los productos que se quieren agregar a la orden',
-        example:`"products": [
-        {
-            "id": "UN_UUID_DE_UN_PRODUCTO",
-        },
-        {
-            "id": "UN_UUID_DE_UN_PRODUCTO",
-        },
-        {
-            "id":"UN_UUID_DE_UN_PRODUCTO",
-        }
-            ]`,
+        example:[
+            { id: '550e8400-e29b-41d4-a716-446655440001' },
+            { id: '550e8400-e29b-41d4-a716-446655440002' },
+        ],
       })
     products: OrderProductDto[];
 }

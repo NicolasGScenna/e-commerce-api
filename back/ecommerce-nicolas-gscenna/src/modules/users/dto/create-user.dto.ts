@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
@@ -56,8 +56,8 @@ export class CreateUserDto {
   @IsNumber()
   @IsNotEmpty()
   @ApiProperty({
-    description:'El número es un obligatorio y debe ser un número valido',
-    example:'12345678',
+    description:'Teléfono del usuario como valor numérico.',
+    example:3415551234,
   })
   phone: number;
 
@@ -65,8 +65,8 @@ export class CreateUserDto {
   @IsString()
   @MinLength(5)
   @MaxLength(20)
-  @ApiProperty({
-    description:'El país es opcional, pero debe tener al menos 5 caracteres',
+  @ApiPropertyOptional({
+    description:'País del usuario (opcional, entre 5 y 20 caracteres).',
     example:'Argentina',
   })
   country?: string;
@@ -75,8 +75,8 @@ export class CreateUserDto {
   @IsString()
   @MinLength(5)
   @MaxLength(20)
-  @ApiProperty({
-    description:'La ciudad es opcional, pero debe tener al menos 5 caracteres',
+  @ApiPropertyOptional({
+    description:'Ciudad del usuario (opcional, entre 5 y 20 caracteres).',
     example:'Rosario',
   })
   city?: string;

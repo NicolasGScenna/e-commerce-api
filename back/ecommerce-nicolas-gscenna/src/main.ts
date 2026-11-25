@@ -16,7 +16,7 @@ async function bootstrap() {
           return {property : error.property, constraints: error.constraints}
         });
         return new BadRequestException({
-          alert: "Se han detectado los siguentes errores en la petición:",
+          alert: "Se han detectado los siguientes errores en la petición:",
           errors: cleanErrors
         })
       }
@@ -24,14 +24,20 @@ async function bootstrap() {
   );
 
   const swaggerConfig = new DocumentBuilder()
-                              .setTitle('')
-                              .setDescription('')
-                              .setVersion('1.0')
-                              .addBearerAuth()
+                              .setTitle('E-commerce API')
+                              .setDescription(`API REST para gestionar usuarios, autenticación, productos, categorías, órdenes e imágenes.\n\nLas rutas protegidas requieren un JWT: inicia sesión en POST /auth/signin y pega el valor del token en Authorize, sin escribir el prefijo Bearer.\n\nLa paginación usa page (desde 1) y limit (cantidad por página). Los ejemplos de request y response están incluidos en cada operación.`)
+                              .setVersion('1.0.0')
+                              .addBearerAuth(
+                                { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', description: 'Token JWT devuelto por POST /auth/signin.' },
+                                'bearer',
+                              )
                               .build();
 
   const document = SwaggerModule.createDocument(app,swaggerConfig);
-  SwaggerModule.setup('api',app,document)
+  SwaggerModule.setup('api',app,document,{
+    swaggerOptions: { persistAuthorization: true, operationsSorter: 'alpha', tagsSorter: 'alpha' },
+    customSiteTitle: 'E-commerce API | Swagger',
+  })
   const port = Number(process.env.PORT) || 3000;
   await app.listen(port, '0.0.0.0');
 }
